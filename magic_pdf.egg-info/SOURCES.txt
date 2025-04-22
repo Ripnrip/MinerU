@@ -3,6 +3,7 @@ README.md
 setup.py
 magic_pdf/__init__.py
 magic_pdf/pdf_parse_union_core_v2.py
+magic_pdf.egg-info/.DS_Store
 magic_pdf.egg-info/PKG-INFO
 magic_pdf.egg-info/SOURCES.txt
 magic_pdf.egg-info/dependency_links.txt
