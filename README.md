@@ -352,6 +352,85 @@ You can enable MPS acceleration by setting the `device-mode` parameter to `mps` 
 
 [Using MinerU via Command Line](https://mineru.readthedocs.io/en/latest/user_guide/usage/command_line.html)
 
+#### Quick Access Functions
+
+For convenience, you can set up shell functions to quickly activate the conda environment and run magic-pdf from any terminal. These functions automatically set the output directory to the same location as your input PDF:
+
+```bash
+# Add these functions to your shell configuration file (~/.bashrc, ~/.zshrc, etc.)
+magic-pdf-activate() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: magic-pdf-activate <pdf_file_path> [additional_options]"
+        echo "Example: magic-pdf-activate ~/Documents/sample.pdf"
+        echo "Example: magic-pdf-activate ~/Documents/sample.pdf -m auto -l en"
+        return 1
+    fi
+    
+    local pdf_path="$1"
+    shift  # Remove first argument, keep the rest
+    local output_dir=$(dirname "$pdf_path")
+    
+    conda activate magicpdf310 && magic-pdf -p "$pdf_path" -o "$output_dir" "$@"
+}
+
+mpdf() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: mpdf <pdf_file_path> [additional_options]"
+        echo "Example: mpdf ~/Documents/sample.pdf"
+        echo "Example: mpdf ~/Documents/sample.pdf -m auto -l en"
+        return 1
+    fi
+    
+    local pdf_path="$1"
+    shift  # Remove first argument, keep the rest
+    local output_dir=$(dirname "$pdf_path")
+    
+    conda activate magicpdf310 && magic-pdf -p "$pdf_path" -o "$output_dir" "$@"
+}
+```
+
+**Usage Examples:**
+```bash
+# Process a PDF - output will be created in the same directory as the input
+mpdf ~/Documents/sample.pdf
+
+# Use OCR method for scanned PDFs
+mpdf ~/Documents/scanned.pdf --ocr
+
+# Use text extraction method for text-based PDFs (faster)
+mpdf ~/Documents/text-based.pdf --txt
+
+# Auto-detect best method (default)
+mpdf ~/Documents/mixed.pdf --auto
+
+# Combine with other options like language and page range
+mpdf ~/Documents/sample.pdf --txt -l en -s 0 -e 5
+```
+
+After adding these functions to your shell configuration file, reload your shell (`source ~/.zshrc` or open a new terminal) to use them.
+
+#### Web UI (Gradio Interface)
+
+For users who prefer a graphical interface, MinerU includes an enhanced web UI:
+
+```bash
+# Launch the web interface
+mineru-ui
+
+# Alternative command
+magic-pdf-ui
+```
+
+The web UI provides:
+- 🎯 **Enhanced OCR Control**: Choose between auto, text, or OCR methods
+- 📁 **Drag & Drop Upload**: Support for PDFs, images, and Office documents  
+- ⚙️ **Advanced Options**: Formula recognition, table detection, language selection
+- 📖 **Page Range Selection**: Process specific pages or ranges
+- 🎨 **Live Preview**: See results with rendered markdown and layout analysis
+- 💾 **ZIP Download**: Get complete output package with all assets
+
+Access the UI at `http://localhost:7860` after launching.
+
 > [!TIP]
 > For more information about the output files, please refer to the [Output File Description](docs/output_file_en_us.md).
 
@@ -467,3 +546,65 @@ This project currently uses PyMuPDF to achieve advanced functionality. However, 
 - [LabelU (A Lightweight Multi-modal Data Annotation Tool)](https://github.com/opendatalab/labelU)
 - [LabelLLM (An Open-source LLM Dialogue Annotation Platform)](https://github.com/opendatalab/LabelLLM)
 - [PDF-Extract-Kit (A Comprehensive Toolkit for High-Quality PDF Content Extraction)](https://github.com/opendatalab/PDF-Extract-Kit)
+
+# MinerU - Enhanced with Custom Shell Functions & Web Interface
+
+## 🎉 Enhanced Features
+
+This repository includes **custom shell functions** and an **enhanced Gradio web interface** for easier interaction with MinerU:
+
+### 🖥️ **Enhanced Command Line Functions**
+
+```bash
+# Activate MinerU environment
+magic-pdf-activate
+
+# Process PDFs with automatic output directory detection
+mpdf ~/Documents/sample.pdf --txt     # Fast text extraction  
+mpdf ~/Documents/sample.pdf --ocr     # OCR for scanned PDFs
+mpdf ~/Documents/sample.pdf --auto    # Smart auto detection (default)
+
+# Launch web interface
+mineru-ui        # Launch enhanced Gradio web interface
+magic-pdf-ui     # Alternative launcher name
+
+# Troubleshooting tools
+mineru-check     # Check models and environment status
+mineru-fix       # Auto-fix common issues
+```
+
+### 🌐 **Enhanced Web Interface**
+
+- **Three OCR Control Methods**: Auto, Text-only, OCR-only
+- **Page Range Selection**: Process specific page ranges
+- **Enhanced Error Handling**: Comprehensive error messages and troubleshooting guidance
+- **Automatic Port Detection**: Finds available ports automatically (7860-7960)
+- **PDF Validation**: Checks for corrupted or unsupported files
+- **Progress Indicators**: Real-time processing status
+- **Multiple Output Formats**: Markdown, raw text, layout analysis
+- **File Size Limits**: 500MB maximum with validation
+
+### 🔧 **Installation & Setup**
+
+All functions are automatically added to your shell when you install the requirements:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Download required models
+python scripts/download_models_complete.py
+
+# Shell functions are ready to use!
+mpdf --help
+mineru-ui
+```
+
+### 📊 **System Status**
+
+✅ **CLI Functions**: Fully functional with comprehensive help and error handling  
+✅ **Web Interface**: Running with enhanced features and automatic troubleshooting  
+✅ **Model Validation**: All OCR and processing models properly configured  
+✅ **Cross-Platform**: Works on Linux, macOS, and Windows
+
+---

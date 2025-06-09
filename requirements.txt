@@ -1,43 +1,82 @@
-# Core
+# Core MinerU package
 magic-pdf==1.2.2
-numpy
-pandas
-matplotlib
-scikit-learn
-scipy
-tqdm
-requests
-aiohttp
-PyYAML
-huggingface_hub
-pillow
-opencv-python-headless
-filelock
 
-# AI + MPS
-torch
-torchvision
-torchaudio
-transformers
-onnxruntime
-ultralytics
-albumentations
-doclayout_yolo
+# Core dependencies with pinned versions
+numpy==1.26.4
+pandas==2.2.3
+matplotlib==3.10.1
+scikit-learn==1.6.1
+scipy==1.15.2
+tqdm==4.67.1
+requests==2.32.3
+aiohttp==3.11.18
+PyYAML==6.0.2
+huggingface-hub==0.30.2
+pillow==11.2.1
+opencv-python-headless==4.11.0.86
+filelock==3.18.0
+
+# AI/ML frameworks
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+transformers==4.42.4
+onnxruntime==1.21.1
+ultralytics==8.3.113
+albumentations==1.4.24
+doclayout-yolo==0.0.3
 
 # PDF processing
-pdfminer.six
-PyMuPDF
-python-docx
+pdfminer.six==20231228
+PyMuPDF==1.24.14
+python-docx==1.1.2
 
-# Logging + utils
-coloredlogs
-termcolor
-MarkupSafe
-Jinja2
-black
-regex
+# OCR and table recognition
+paddleocr==2.10.0
+paddlepaddle==2.6.2
+rapid-table==1.0.5
+rapidocr-onnxruntime==1.4.4
+struct-eqtable==0.3.3
 
-# Optional (layout, OCR, etc.)
-opencv-contrib-python
-ftfy
-rapidocr-onnxruntime
+# Formula recognition
+unimernet==0.2.3
+
+# Additional AI/ML dependencies for enhanced functionality
+struct_eqtable==0.3.3
+fairscale==0.4.13
+evaluate==0.4.3
+datasets==3.6.0
+webdataset==0.2.111
+braceexpand==0.1.7
+xxhash==3.5.0
+multiprocess==0.70.16
+pyarrow==20.0.0
+wand==0.6.13
+
+# Logging and utilities
+coloredlogs==15.0.1
+termcolor==3.0.1
+MarkupSafe==3.0.2
+Jinja2==3.1.6
+black==25.1.0
+regex==2024.11.6
+
+# Additional computer vision
+opencv-contrib-python==4.11.0.86
+ftfy==6.3.1
+
+# Language detection and processing
+fast-langdetect==0.2.5
+
+# Web UI dependencies
+gradio>=4.0,<6.0
+gradio-pdf==0.0.22
+loguru==0.7.3
+pymupdf==1.26.0
+
+# Additional utilities
+beautifulsoup4==4.13.4
+lxml==5.3.2
+protobuf==6.30.2
+packaging==25.0
+typing-extensions==4.13.2
